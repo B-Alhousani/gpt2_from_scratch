@@ -1,14 +1,14 @@
 import torch
 import torch.nn as nn
-
+from gpt2_from_scratch.config import Config
 
 class positional_embedding(nn.Module):
 
-    def __init__(self,context_max,dim):
+    def __init__(self,cfg:Config):
 
         super().__init__()
 
-        self.positional_embedding = nn.Parameter(torch.randn(context_max,dim)*0.02)
+        self.positional_embedding = nn.Parameter(torch.randn(cfg.n_ctx,cfg.d_model)*0.02)
 
 
     def forward(self,ids:torch.Tensor):

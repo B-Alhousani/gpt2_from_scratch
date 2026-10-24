@@ -2,17 +2,19 @@ import torch
 
 import torch.nn as nn
 
+from gpt2_from_scratch.config import Config
+
 class LayerNorm(nn.Module):
 
-    def __init__(self,features,eps= 1e-5):
+    def __init__(self,cfg:Config,eps= 1e-5):
         
         super().__init__()
 
         self.eps = eps
 
-        self.gamma = nn.Parameter(torch.ones(features))
+        self.gamma = nn.Parameter(torch.ones(cfg.d_model))
 
-        self.beta = nn.Parameter(torch.zeros(features))
+        self.beta = nn.Parameter(torch.zeros(cfg.d_model))
     
     def mean(self,hidden_states:torch.Tensor):
         mean_feature = hidden_states.mean(dim=-1,keepdim=True)

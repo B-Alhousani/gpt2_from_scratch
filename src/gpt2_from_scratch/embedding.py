@@ -2,13 +2,16 @@ import torch
 
 import torch.nn as nn 
 
+from gpt2_from_scratch.config import Config
+
+
 class embedding(nn.Module):
 
-    def __init__(self,vocab,dim):
+    def __init__(self,cfg:Config):
 
         super().__init__()
 
-        self.embedding_matrix = nn.Parameter(torch.randn(vocab,dim)*0.02)
+        self.embedding_matrix = nn.Parameter(torch.randn(cfg.d_vocab,cfg.d_model)*0.02)
     
     def forward(self,ids:torch.Tensor):
 
